@@ -1,0 +1,10 @@
+body {
+  font-family: system-ui, sans-serif;
+  margin: 40px;
+  line-height: 1.6;
+}
+
+a, button {
+  display: inline-block;
+  margin-top: 20px;
+}
