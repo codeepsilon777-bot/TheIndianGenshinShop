@@ -18,9 +18,52 @@
 
   <p><strong>No refunds after successful delivery.</strong></p>
 
-  <button disabled>
-    Checkout (coming soon)
+<form name="welkin-order"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      action="/success/">
+
+  <!-- Netlify required hidden fields -->
+  <input type="hidden" name="form-name" value="welkin-order">
+  <input type="hidden" name="product" value="Welkin Moon">
+
+  <!-- Honeypot -->
+  <p hidden>
+    <label>Don’t fill this: <input name="bot-field"></label>
+  </p>
+
+  <label>
+    UID:
+    <input type="text" name="uid" required pattern="[0-9]{9}">
+  </label>
+
+  <label>
+    Server:
+    <select name="server" required>
+      <option value="">Select server</option>
+      <option>Asia</option>
+      <option>Europe</option>
+      <option>America</option>
+      <option>TW / HK / MO</option>
+    </select>
+  </label>
+
+  <label>
+    Email:
+    <input type="email" name="email" required>
+  </label>
+
+  <label>
+    Mobile number:
+    <input type="tel" name="phone" required pattern="[0-9]{10}">
+  </label>
+
+  <button type="submit">
+    Proceed to Checkout
   </button>
+</form>
+
 
   <a href="/">← Back to home</a>
 
