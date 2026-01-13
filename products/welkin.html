@@ -18,11 +18,13 @@
 
   <p><strong>No refunds after successful delivery.</strong></p>
 
-<form name="welkin-order"
+<form id="welkinForm"
+      name="welkin-order"
       method="POST"
       data-netlify="true"
       netlify-honeypot="bot-field"
-      action="/success/index.html">
+      action="/success/">
+
 
   <!-- Netlify required hidden fields -->
   <input type="hidden" name="form-name" value="welkin-order">
@@ -63,6 +65,39 @@
     Proceed to Checkout
   </button>
 </form>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  const form = document.getElementById("welkinForm");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const options = {
+      key: rzp_test_S3RvVVLw36ZRLb,
+      amount: 39900, // ₹399 in paise
+      currency: "INR",
+      name: "The Indian Genshin Shop",
+      description: "Welkin Moon",
+      handler: function (response) {
+        const paymentInput = document.createElement("input");
+        paymentInput.type = "hidden";
+        paymentInput.name = "razorpay_payment_id";
+        paymentInput.value = response.razorpay_payment_id;
+        form.appendChild(paymentInput);
+
+        form.submit();
+      },
+      prefill: {
+        email: form.email.value,
+        contact: form.phone.value
+      }
+    };
+
+    const rzp = new Razorpay(options);
+    rzp.open();
+  });
+</script>
 
 
   <a href="/">← Back to home</a>
